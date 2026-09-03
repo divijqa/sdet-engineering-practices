@@ -32,7 +32,7 @@ API automation and service-level validation covering:
 
 ### Mobile Engineering
 
-Modern mobile automation engineering practices covering:
+Modern Mobile automation engineering practices covering:
 
 - Mobile-Test-Architecture
 - Android-Automation
