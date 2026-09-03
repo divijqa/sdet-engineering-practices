@@ -2,7 +2,7 @@
 
 Engineering-driven practices for building scalable, maintainable, and reliable test automation.
 
-This repository is the engineering counterpart to [QA Operations](https://divijqa.github.io/QA-Ops-Docs/). It documents the technical decisions, patterns, and delivery practices that help SDETs build dependable automation across UI and API layers.
+This repository is the engineering counterpart to [QA Operations](https://divijqa.github.io/QA-Ops-Docs/). It documents the technical decisions, patterns, and delivery practices that help SDETs build dependable automation across Web , Mobile - UI and API layers.
 
 The documentation moves from automation implementation to shared engineering foundations: build reliable UI and API capabilities first, then standardize the libraries, data, gates, and pipelines that make them sustainable.
 
@@ -29,6 +29,21 @@ API automation and service-level validation covering:
 - Schema validation
 - Authentication
 - CI/CD integration
+
+### Mobile Engineering
+- Mobile-Test-Architecture
+- Android-Automation
+- iOS-Automation
+- Appium-Engineering-Practices
+- Android-UI-Automation
+- iOS-UI-Automation
+- Mobile-Locator-Strategy
+- Mobile-Test-Data
+- Mobile-API-Integration
+- Real-Device-Testing
+- Emulator-&-Simulator-Testing
+- Mobile-CI-CD
+- Mobile-Test-Strategy
 
 ### Engineering Foundations
 
@@ -63,6 +78,21 @@ SDET Engineering Practices
 │   ├── Schema Validation
 │   ├── Auth Flows
 │   └── API CI/CD Integration
+│
+├── MOBILE ENGINEERING
+│   ├── Mobile Test Architecture
+│   ├── Android Automation
+│   ├── iOS Automation
+│   ├── Appium Engineering Practices
+│   ├── Android UI Automation
+│   ├── iOS UI Automation
+│   ├── Mobile Locator Strategy
+│   ├── Mobile Test Data
+│   ├── Mobile API Integration
+│   ├── Real Device Testing
+│   ├── Emulator & Simulator Testing
+│   ├── Mobile CI/CD
+│   └── Mobile Test Strategy
 │
 └── Engineering Foundations
     ├── Framework Architecture

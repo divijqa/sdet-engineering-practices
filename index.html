@@ -1,834 +1,870 @@
 <!doctype html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <meta
-      name="description"
-      content="SDET Engineering Practices documentation by Divij Mothe."
-    />
+    <meta name="description" content="SDET Engineering Practices documentation by Divij Mothe." />
 
     <title>SDET Engineering Practices | Divij Mothe</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css" />
 
     <style>
-      @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
+        @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap");
 
-      :root {
-        --ink: #102b2f;
-        --paper: #f5f5ef;
-        --sea: #0f6663;
-        --mint: #b8ded0;
-        --signal: #f15a3a;
-        --line: rgba(16, 43, 47, .15);
-        --theme-color: var(--sea);
-      }
-
-      body {
-        color: var(--ink);
-        background: var(--paper);
-        font-family: "Manrope", sans-serif;
-      }
-
-      .sidebar {
-        width: 320px;
-        padding: 28px 24px;
-        background: var(--ink);
-        color: #d8e3df;
-        border-right: 0;
-      }
-
-      .sidebar::before {
-        display: block;
-        margin: 12px 0 28px 4px;
-        color: var(--paper);
-        content: "SDET ENGINEERING";
-        font-family: "DM Mono", monospace;
-        font-size: .72rem;
-        letter-spacing: .1em;
-      }
-
-      .sidebar .sidebar-nav {
-        padding: 0;
-      }
-
-      .sidebar ul li a {
-        color: #c4d2ce;
-        font-size: .84rem;
-        font-weight: 600;
-      }
-
-      .sidebar ul li a:hover,
-      .sidebar ul li.active > a {
-        color: var(--mint);
-      }
-
-      .sidebar-nav > ul > li > p {
-        margin: 27px 0 9px;
-        color: var(--mint);
-        font-family: "DM Mono", monospace;
-        font-size: .7rem;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-      }
-
-      .sidebar-nav > ul > li:first-child > p {
-        margin-top: 0;
-      }
-
-      .sidebar-nav > ul > li > p {
-        position: relative;
-        padding-right: 20px;
-        cursor: pointer;
-      }
-
-      .sidebar-nav > ul > li > p::after {
-        position: absolute;
-        right: 2px;
-        content: "+";
-        font-size: .95rem;
-        line-height: .8;
-      }
-
-      .sidebar-nav > ul > li.is-single > p::after {
-        display: none;
-      }
-
-      .sidebar-nav > ul > li.is-open > p::after {
-        content: "-";
-      }
-
-      .sidebar-nav > ul > li > ul {
-        display: none !important;
-        margin: 6px 0;
-      }
-
-      .sidebar-nav > ul > li.is-open > ul {
-        display: block !important;
-      }
-
-      .sidebar-toggle {
-        padding: 8px 10px;
-        background: var(--ink);
-      }
-
-      .sidebar-toggle span {
-        background-color: var(--mint);
-      }
-
-      .qa-page-outline {
-        position: fixed;
-        top: 96px;
-        right: 38px;
-        width: 205px;
-        padding-left: 16px;
-        border-left: 1px solid var(--line);
-        z-index: 2;
-      }
-
-      .qa-page-outline strong {
-        display: block;
-        margin: 0 0 11px;
-        color: var(--sea);
-        font-family: "DM Mono", monospace;
-        font-size: .68rem;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-      }
-
-      .qa-page-outline a {
-        display: block;
-        padding: 5px 0;
-        color: #647273;
-        font-size: .78rem;
-        line-height: 1.38;
-        text-decoration: none;
-      }
-
-      .qa-page-outline a:hover {
-        color: var(--sea);
-      }
-
-      .qa-page-outline .level-3 {
-        padding-left: 14px;
-        font-size: .68rem;
-      }
-
-      html body.ready nav.app-nav {
-        position: fixed !important;
-        top: 0 !important;
-        right: 0 !important;
-        left: 320px !important;
-        display: block !important;
-        margin: 0;
-        padding: 18px 48px;
-        border-bottom: 1px solid var(--line);
-        background: rgba(245, 245, 239, .96);
-        z-index: 20;
-        backdrop-filter: blur(10px);
-      }
-
-      .app-nav p {
-        display: flex;
-        justify-content: flex-end;
-        gap: 26px;
-        margin: 0;
-      }
-
-      .app-nav a {
-        padding-bottom: 5px;
-        color: var(--ink);
-        font-size: .79rem;
-        font-weight: 800;
-        text-decoration: none;
-      }
-
-      .app-nav a:hover,
-      .app-nav a[aria-current="page"] {
-        color: var(--sea);
-        border-bottom: 2px solid var(--signal);
-      }
-
-      .markdown-section {
-        max-width: 900px;
-        margin-right: 230px;
-        padding: 132px 58px 90px;
-      }
-
-      .markdown-section h1,
-      .markdown-section h2,
-      .markdown-section h3 {
-        color: var(--ink);
-        font-family: "Manrope", sans-serif;
-        font-weight: 800;
-        letter-spacing: 0;
-      }
-
-      .markdown-section h1 {
-        font-size: clamp(2.7rem, 4.5vw, 4.35rem);
-        line-height: 1.06;
-      }
-
-      .markdown-section h1 + p {
-        max-width: 730px;
-        color: #647273;
-        font-size: 1.08rem;
-        line-height: 1.65;
-      }
-
-      .markdown-section h2 {
-        margin-top: 56px;
-        padding-bottom: 12px;
-        border-bottom: 1px solid var(--line);
-        font-size: 1.58rem;
-      }
-
-      .markdown-section h3 {
-        font-size: 1.08rem;
-      }
-
-      .markdown-section a {
-        color: var(--sea);
-        font-weight: 700;
-      }
-
-      .markdown-section a:hover {
-        color: var(--signal);
-      }
-
-      .markdown-section code {
-        color: var(--sea);
-        background: #e1eee7;
-        font-family: "DM Mono", monospace;
-      }
-
-      .github-corner svg {
-        fill: var(--sea);
-        color: var(--paper);
-      }
-
-      .app-sub-sidebar {
-        display: none !important;
-      }
-
-      .docsify-pagination-container {
-        border-top-color: var(--line);
-      }
-
-      .qa-mobile-menu,
-      .qa-mobile-menu-toggle {
-        display: none;
-      }
-
-      @media (max-width: 1100px) {
-        .qa-page-outline {
-          display: none;
+        :root {
+            --ink: #102b2f;
+            --paper: #f5f5ef;
+            --sea: #0f6663;
+            --mint: #b8ded0;
+            --signal: #f15a3a;
+            --line: rgba(16, 43, 47, .15);
+            --theme-color: var(--sea);
         }
 
-        .markdown-section {
-          margin-right: 0;
-        }
-      }
-
-      @media (max-width: 768px) {
-        html,
         body {
-          overflow-x: hidden;
+            color: var(--ink);
+            background: var(--paper);
+            font-family: "Manrope", sans-serif;
+        }
+
+        .sidebar {
+            width: 320px;
+            padding: 28px 24px;
+            background: var(--ink);
+            color: #d8e3df;
+            border-right: 0;
+        }
+
+        .sidebar::before {
+            display: block;
+            margin: 12px 0 28px 4px;
+            color: var(--paper);
+            content: "SDET ENGINEERING";
+            font-family: "DM Mono", monospace;
+            font-size: .72rem;
+            letter-spacing: .1em;
+        }
+
+        .sidebar .sidebar-nav {
+            padding: 0;
+        }
+
+        .sidebar ul li a {
+            color: #c4d2ce;
+            font-size: .84rem;
+            font-weight: 600;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li.active>a {
+            color: var(--mint);
+        }
+
+        .sidebar-nav>ul>li>p {
+            margin: 27px 0 9px;
+            color: var(--mint);
+            font-family: "DM Mono", monospace;
+            font-size: .7rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+        }
+
+        .sidebar-nav>ul>li:first-child>p {
+            margin-top: 0;
+        }
+
+        .sidebar-nav>ul>li>p {
+            position: relative;
+            padding-right: 20px;
+            cursor: pointer;
+        }
+
+        .sidebar-nav>ul>li>p::after {
+            position: absolute;
+            right: 2px;
+            content: "+";
+            font-size: .95rem;
+            line-height: .8;
+        }
+
+        .sidebar-nav>ul>li.is-single>p::after {
+            display: none;
+        }
+
+        .sidebar-nav>ul>li.is-open>p::after {
+            content: "-";
+        }
+
+        .sidebar-nav>ul>li>ul {
+            display: none !important;
+            margin: 6px 0;
+        }
+
+        .sidebar-nav>ul>li.is-open>ul {
+            display: block !important;
+        }
+
+        .sidebar-toggle {
+            padding: 8px 10px;
+            background: var(--ink);
+        }
+
+        .sidebar-toggle span {
+            background-color: var(--mint);
+        }
+
+        .qa-page-outline {
+            position: fixed;
+            top: 96px;
+            right: 38px;
+            width: 205px;
+            padding-left: 16px;
+            border-left: 1px solid var(--line);
+            z-index: 2;
+        }
+
+        .qa-page-outline strong {
+            display: block;
+            margin: 0 0 11px;
+            color: var(--sea);
+            font-family: "DM Mono", monospace;
+            font-size: .68rem;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .qa-page-outline a {
+            display: block;
+            padding: 5px 0;
+            color: #647273;
+            font-size: .78rem;
+            line-height: 1.38;
+            text-decoration: none;
+        }
+
+        .qa-page-outline a:hover {
+            color: var(--sea);
+        }
+
+        .qa-page-outline .level-3 {
+            padding-left: 14px;
+            font-size: .68rem;
         }
 
         html body.ready nav.app-nav {
-          position: fixed !important;
-          top: 0 !important;
-          right: 0 !important;
-          left: 0 !important;
-          display: block !important;
-          padding: 12px 14px;
-          z-index: 32;
+            position: fixed !important;
+            top: 0 !important;
+            right: 0 !important;
+            left: 320px !important;
+            display: block !important;
+            margin: 0;
+            padding: 18px 48px;
+            border-bottom: 1px solid var(--line);
+            background: rgba(245, 245, 239, .96);
+            z-index: 20;
+            backdrop-filter: blur(10px);
         }
 
         .app-nav p {
-          display: flex;
-          gap: 0;
-          justify-content: space-between;
-          width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            gap: 26px;
+            margin: 0;
         }
 
         .app-nav a {
-          min-width: 0;
-          padding: 5px 2px;
-          font-size: .64rem;
-          white-space: nowrap;
+            padding-bottom: 5px;
+            color: var(--ink);
+            font-size: .79rem;
+            font-weight: 800;
+            text-decoration: none;
         }
 
-        .sidebar,
-        .sidebar-toggle {
-          display: none !important;
-        }
-
-        .content {
-          left: 0 !important;
-          margin-left: 0 !important;
-        }
-
-        .qa-mobile-menu-toggle {
-          position: fixed;
-          right: 14px;
-          bottom: 14px;
-          display: grid;
-          width: 46px;
-          height: 46px;
-          place-items: center;
-          border: 1px solid var(--mint);
-          color: var(--mint);
-          background: var(--ink);
-          font-size: 1.3rem;
-          z-index: 31;
-        }
-
-        .qa-mobile-menu {
-          position: fixed;
-          inset: 0;
-          display: none;
-          overflow-y: auto;
-          padding: 34px 24px 72px;
-          background: var(--ink);
-          color: #d8e3df;
-          z-index: 30;
-        }
-
-        body.qa-mobile-menu-open .qa-mobile-menu {
-          display: block;
-        }
-
-        .qa-mobile-menu::before {
-          display: block;
-          margin-bottom: 28px;
-          color: var(--paper);
-          content: "SDET ENGINEERING";
-          font-family: "DM Mono", monospace;
-          font-size: .72rem;
-          letter-spacing: .1em;
-        }
-
-        .qa-mobile-menu .sidebar-nav {
-          padding: 0;
-        }
-
-        .qa-mobile-menu ul {
-          padding: 0;
-          margin: 0;
-          list-style: none;
-        }
-
-        .qa-mobile-menu li {
-          margin: 0;
-        }
-
-        .qa-mobile-menu a {
-          display: block;
-          padding: 9px 0;
-          color: #c4d2ce;
-          font-size: .9rem;
-          font-weight: 600;
-          text-decoration: none;
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li > p {
-          position: relative;
-          margin: 28px 0 7px;
-          padding-right: 24px;
-          color: var(--mint);
-          font-family: "DM Mono", monospace;
-          font-size: .7rem;
-          font-weight: 500;
-          letter-spacing: .1em;
-          text-transform: uppercase;
-          cursor: pointer;
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li > p::after {
-          position: absolute;
-          right: 0;
-          content: "+";
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li.is-open > p::after {
-          content: "-";
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li.is-single > p::after {
-          display: none;
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li > ul {
-          display: none !important;
-        }
-
-        .qa-mobile-menu > .sidebar-nav > ul > li.is-open > ul {
-          display: block !important;
+        .app-nav a:hover,
+        .app-nav a[aria-current="page"] {
+            color: var(--sea);
+            border-bottom: 2px solid var(--signal);
         }
 
         .markdown-section {
-          width: 100%;
-          padding: 84px 22px 72px;
+            max-width: 900px;
+            margin-right: 230px;
+            padding: 132px 58px 90px;
+        }
+
+        .markdown-section h1,
+        .markdown-section h2,
+        .markdown-section h3 {
+            color: var(--ink);
+            font-family: "Manrope", sans-serif;
+            font-weight: 800;
+            letter-spacing: 0;
         }
 
         .markdown-section h1 {
-          font-size: clamp(2.25rem, 11vw, 3.1rem);
-          overflow-wrap: anywhere;
+            font-size: clamp(2.7rem, 4.5vw, 4.35rem);
+            line-height: 1.06;
+        }
+
+        .markdown-section h1+p {
+            max-width: 730px;
+            color: #647273;
+            font-size: 1.08rem;
+            line-height: 1.65;
         }
 
         .markdown-section h2 {
-          font-size: 1.35rem;
+            margin-top: 56px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+            font-size: 1.58rem;
         }
-      }
-    </style>
-  </head>
 
-  <body>
+        .markdown-section h3 {
+            font-size: 1.08rem;
+        }
+
+        .markdown-section a {
+            color: var(--sea);
+            font-weight: 700;
+        }
+
+        .markdown-section a:hover {
+            color: var(--signal);
+        }
+
+        .markdown-section code {
+            color: var(--sea);
+            background: #e1eee7;
+            font-family: "DM Mono", monospace;
+        }
+
+        .github-corner svg {
+            fill: var(--sea);
+            color: var(--paper);
+        }
+
+        .app-sub-sidebar {
+            display: none !important;
+        }
+
+        .docsify-pagination-container {
+            border-top-color: var(--line);
+        }
+
+        .qa-mobile-menu,
+        .qa-mobile-menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 1100px) {
+            .qa-page-outline {
+                display: none;
+            }
+
+            .markdown-section {
+                margin-right: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+
+            html,
+            body {
+                overflow-x: hidden;
+            }
+
+            html body.ready nav.app-nav {
+                position: fixed !important;
+                top: 0 !important;
+                right: 0 !important;
+                left: 0 !important;
+                display: block !important;
+                padding: 12px 14px;
+                z-index: 32;
+            }
+
+            .app-nav p {
+                display: flex;
+                gap: 0;
+                justify-content: space-between;
+                width: 100%;
+            }
+
+            .app-nav a {
+                min-width: 0;
+                padding: 5px 2px;
+                font-size: .64rem;
+                white-space: nowrap;
+            }
+
+            .sidebar,
+            .sidebar-toggle {
+                display: none !important;
+            }
+
+            .content {
+                left: 0 !important;
+                margin-left: 0 !important;
+            }
+
+            .qa-mobile-menu-toggle {
+                position: fixed;
+                right: 14px;
+                bottom: 14px;
+                display: grid;
+                width: 46px;
+                height: 46px;
+                place-items: center;
+                border: 1px solid var(--mint);
+                color: var(--mint);
+                background: var(--ink);
+                font-size: 1.3rem;
+                z-index: 31;
+            }
+
+            .qa-mobile-menu {
+                position: fixed;
+                inset: 0;
+                display: none;
+                overflow-y: auto;
+                padding: 34px 24px 72px;
+                background: var(--ink);
+                color: #d8e3df;
+                z-index: 30;
+            }
+
+            body.qa-mobile-menu-open .qa-mobile-menu {
+                display: block;
+            }
+
+            .qa-mobile-menu::before {
+                display: block;
+                margin-bottom: 28px;
+                color: var(--paper);
+                content: "SDET ENGINEERING";
+                font-family: "DM Mono", monospace;
+                font-size: .72rem;
+                letter-spacing: .1em;
+            }
+
+            .qa-mobile-menu .sidebar-nav {
+                padding: 0;
+            }
+
+            .qa-mobile-menu ul {
+                padding: 0;
+                margin: 0;
+                list-style: none;
+            }
+
+            .qa-mobile-menu li {
+                margin: 0;
+            }
+
+            .qa-mobile-menu a {
+                display: block;
+                padding: 9px 0;
+                color: #c4d2ce;
+                font-size: .9rem;
+                font-weight: 600;
+                text-decoration: none;
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li>p {
+                position: relative;
+                margin: 28px 0 7px;
+                padding-right: 24px;
+                color: var(--mint);
+                font-family: "DM Mono", monospace;
+                font-size: .7rem;
+                font-weight: 500;
+                letter-spacing: .1em;
+                text-transform: uppercase;
+                cursor: pointer;
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li>p::after {
+                position: absolute;
+                right: 0;
+                content: "+";
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li.is-open>p::after {
+                content: "-";
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li.is-single>p::after {
+                display: none;
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li>ul {
+                display: none !important;
+            }
+
+            .qa-mobile-menu>.sidebar-nav>ul>li.is-open>ul {
+                display: block !important;
+            }
+
+            .markdown-section {
+                width: 100%;
+                padding: 84px 22px 72px;
+            }
+
+            .markdown-section h1 {
+                font-size: clamp(2.25rem, 11vw, 3.1rem);
+                overflow-wrap: anywhere;
+            }
+
+            .markdown-section h2 {
+                font-size: 1.35rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
 
     <div id="app">
-      Loading SDET Engineering Practices documentation...
+        Loading SDET Engineering Practices documentation...
     </div>
 
     <script>
-      window.$docsify = {
-        name: "SDET Engineering Practices",
+        window.$docsify = {
+            name: "SDET Engineering Practices",
 
-        repo: "https://github.com/divijqa/sdet-engineering-practices",
+            repo: "https://github.com/divijqa/sdet-engineering-practices",
 
-        homepage: "README.md",
+            homepage: "README.md",
 
-        loadSidebar: true,
+            loadSidebar: true,
 
-        loadNavbar: true,
+            loadNavbar: true,
 
-        subMaxLevel: 0,
+            subMaxLevel: 0,
 
-        auto2top: true,
+            auto2top: true,
 
-        externalLinkTarget: "_self",
+            externalLinkTarget: "_self",
 
-        search: {
-          placeholder: "Search SDET documentation",
-          noData: "No matching documentation.",
-          depth: 3
-        }
-      };
+            search: {
+                placeholder: "Search SDET documentation",
+                noData: "No matching documentation.",
+                depth: 3
+            }
+        };
     </script>
 
     <script>
-      window.$docsify.plugins = [
-        function (hook, vm) {
+        window.$docsify.plugins = [
+            function (hook, vm) {
 
-          function normalizeNavbar() {
-            var navbar = document.querySelector(".app-nav");
+                function normalizeNavbar() {
+                    var navbar = document.querySelector(".app-nav");
 
-            if (!navbar) return;
+                    if (!navbar) return;
 
-            navbar.style.setProperty(
-              "position",
-              "fixed",
-              "important"
-            );
+                    navbar.style.setProperty(
+                        "position",
+                        "fixed",
+                        "important"
+                    );
 
-            navbar.style.setProperty(
-              "top",
-              "0",
-              "important"
-            );
+                    navbar.style.setProperty(
+                        "top",
+                        "0",
+                        "important"
+                    );
 
-            navbar.style.setProperty(
-              "right",
-              "0",
-              "important"
-            );
+                    navbar.style.setProperty(
+                        "right",
+                        "0",
+                        "important"
+                    );
 
-            navbar.style.setProperty(
-              "left",
-              innerWidth <= 768 ? "0" : "320px",
-              "important"
-            );
+                    navbar.style.setProperty(
+                        "left",
+                        innerWidth <= 768 ? "0" : "320px",
+                        "important"
+                    );
 
-            navbar
-              .querySelectorAll("a")
-              .forEach(function (link) {
-                link.target = "_self";
-              });
-          }
+                    navbar
+                        .querySelectorAll("a")
+                        .forEach(function (link) {
+                            link.target = "_self";
+                        });
+                }
 
-          new MutationObserver(normalizeNavbar)
-            .observe(
-              document.documentElement,
-              {
-                childList: true,
-                subtree: true
-              }
-            );
-
-
-          /*
-           * GitHub Wiki Mapping
-           *
-           * Local Docsify routes
-           *        ↓
-           * GitHub Wiki Markdown
-           */
-
-          var wikiPages = {
-
-            "ui/ui-framework-architecture.md":
-              "UI-Framework-Architecture",
-
-            "ui/playwright-engineering-practices.md":
-              "Playwright-Engineering-Practices",
-
-            "ui/selenium-engineering-practices.md":
-              "Selenium-Engineering-Practices",
-
-            "ui/locator-strategy.md":
-              "Locator-Strategy",
-
-            "ui/page-object-model.md":
-              "Page-Object-Model",
-
-            "ui/ui-cicd-integration.md":
-              "UI-CICD-Integration",
+                new MutationObserver(normalizeNavbar)
+                    .observe(
+                        document.documentElement,
+                        {
+                            childList: true,
+                            subtree: true
+                        }
+                    );
 
 
-            "api/api-test-architecture.md":
-              "API-Test-Architecture",
+                /*
+                 * GitHub Wiki Mapping
+                 *
+                 * Local Docsify routes
+                 *        ↓
+                 * GitHub Wiki Markdown
+                 */
 
-            "api/contract-testing.md":
-              "Contract-Testing",
+                var wikiPages = {
 
-            "api/schema-validation.md":
-              "Schema-Validation",
+                    "ui/ui-framework-architecture.md":
+                        "UI-Framework-Architecture",
 
-            "api/auth-flows.md":
-              "Auth-Flows",
+                    "ui/playwright-engineering-practices.md":
+                        "Playwright-Engineering-Practices",
 
-            "api/api-cicd-integration.md":
-              "API-CICD-Integration",
+                    "ui/selenium-engineering-practices.md":
+                        "Selenium-Engineering-Practices",
 
+                    "ui/locator-strategy.md":
+                        "Locator-Strategy",
 
-            "engineering/framework-architecture.md":
-              "Framework-Architecture",
+                    "ui/page-object-model.md":
+                        "Page-Object-Model",
 
-            "engineering/reusable-libraries.md":
-              "Reusable-Libraries",
-
-            "engineering/test-data-engineering.md":
-              "Test-Data-Engineering",
-
-            "engineering/quality-gates.md":
-              "Quality-Gates",
-
-            "engineering/pipeline-orchestration.md":
-              "Pipeline-Orchestration"
-
-          };
+                    "ui/ui-cicd-integration.md":
+                        "UI-CICD-Integration",
 
 
-          hook.beforeEach(function (content, next) {
+                    "api/api-test-architecture.md":
+                        "API-Test-Architecture",
 
-            var page = wikiPages[vm.route.file];
+                    "api/contract-testing.md":
+                        "Contract-Testing",
 
-            if (!page) {
-              next(content);
-              return;
-            }
+                    "api/schema-validation.md":
+                        "Schema-Validation",
 
-            fetch(
-              "https://raw.githubusercontent.com/wiki/divijqa/sdet-engineering-practices/"
-              + page
-              + ".md"
-            )
+                    "api/auth-flows.md":
+                        "Auth-Flows",
 
-              .then(function (response) {
+                    "api/api-cicd-integration.md":
+                        "API-CICD-Integration",
 
-                return response.ok
-                  ? response.text()
-                  : Promise.reject();
+                        
+                    "mobile/mobile-test-architecture.md":
+                        "Mobile-Test-Architecture",
 
-              })
+                    "mobile/android-automation.md":
+                        "Android-Automation",
 
-              .then(function (markdown) {
+                    "mobile/ios-automation.md":
+                        "iOS-Automation",
 
-                next(markdown);
+                    "mobile/appium-engineering-practices.md":
+                        "Appium-Engineering-Practices",
 
-              })
+                    "mobile/android-ui-automation.md":
+                        "Android-UI-Automation",
 
-              .catch(function () {
+                    "mobile/ios-ui-automation.md":
+                        "iOS-UI-Automation",
 
-                next(content);
+                    "mobile/mobile-locator-strategy.md":
+                        "Mobile-Locator-Strategy",
 
-              });
+                    "mobile/mobile-test-data.md":
+                        "Mobile-Test-Data",
 
-          });
+                    "mobile/mobile-api-integration.md":
+                        "Mobile-API-Integration",
+
+                    "mobile/real-device-testing.md":
+                        "Real-Device-Testing",
+
+                    "mobile/emulator-&-simulator-testing.md":
+                        "Emulator-&-Simulator-Testing",
+
+                    "mobile/mobile-ci-cd.md":
+                        "Mobile-CI-CD",
+
+                    "mobile/mobile-test-strategy.md":
+                        "Mobile-Test-Strategy",
 
 
-          hook.doneEach(function () {
+                    "engineering/framework-architecture.md":
+                        "Framework-Architecture",
 
-            setTimeout(function () {
+                    "engineering/reusable-libraries.md":
+                        "Reusable-Libraries",
 
-              document
-                .querySelectorAll(".sidebar-nav > ul > li")
-                .forEach(function (group) {
+                    "engineering/test-data-engineering.md":
+                        "Test-Data-Engineering",
 
-                  if (!group.querySelector(":scope > ul")) {
-                    group.classList.add("is-single");
-                  }
+                    "engineering/quality-gates.md":
+                        "Quality-Gates",
 
-                  if (group.querySelector(".active")) {
-                    group.classList.add("is-open");
-                  }
+                    "engineering/pipeline-orchestration.md":
+                        "Pipeline-Orchestration"
+
+                };
+
+
+                hook.beforeEach(function (content, next) {
+
+                    var page = wikiPages[vm.route.file];
+
+                    if (!page) {
+                        next(content);
+                        return;
+                    }
+
+                    fetch(
+                        "https://raw.githubusercontent.com/wiki/divijqa/sdet-engineering-practices/"
+                        + page
+                        + ".md"
+                    )
+
+                        .then(function (response) {
+
+                            return response.ok
+                                ? response.text()
+                                : Promise.reject();
+
+                        })
+
+                        .then(function (markdown) {
+
+                            next(markdown);
+
+                        })
+
+                        .catch(function () {
+
+                            next(content);
+
+                        });
 
                 });
 
 
-              var mobileMenu =
-                document.querySelector(".qa-mobile-menu");
+                hook.doneEach(function () {
+
+                    setTimeout(function () {
+
+                        document
+                            .querySelectorAll(".sidebar-nav > ul > li")
+                            .forEach(function (group) {
+
+                                if (!group.querySelector(":scope > ul")) {
+                                    group.classList.add("is-single");
+                                }
+
+                                if (group.querySelector(".active")) {
+                                    group.classList.add("is-open");
+                                }
+
+                            });
 
 
-              if (!mobileMenu) {
-
-                mobileMenu =
-                  document.createElement("aside");
-
-                mobileMenu.className =
-                  "qa-mobile-menu";
-
-                document
-                  .querySelector(".content")
-                  .appendChild(mobileMenu);
-
-              }
+                        var mobileMenu =
+                            document.querySelector(".qa-mobile-menu");
 
 
-              mobileMenu.innerHTML =
-                document
-                  .querySelector(".sidebar-nav")
-                  .outerHTML;
+                        if (!mobileMenu) {
+
+                            mobileMenu =
+                                document.createElement("aside");
+
+                            mobileMenu.className =
+                                "qa-mobile-menu";
+
+                            document
+                                .querySelector(".content")
+                                .appendChild(mobileMenu);
+
+                        }
 
 
-              var menuButton =
-                document.querySelector(
-                  ".qa-mobile-menu-toggle"
-                );
+                        mobileMenu.innerHTML =
+                            document
+                                .querySelector(".sidebar-nav")
+                                .outerHTML;
 
 
-              if (!menuButton) {
-
-                menuButton =
-                  document.createElement("button");
-
-                menuButton.className =
-                  "qa-mobile-menu-toggle";
-
-                menuButton.type = "button";
-
-                menuButton.setAttribute(
-                  "aria-label",
-                  "Open documentation navigation"
-                );
-
-                menuButton.textContent = "≡";
-
-                document
-                  .querySelector(".content")
-                  .appendChild(menuButton);
-
-              }
-
-            }, 0);
+                        var menuButton =
+                            document.querySelector(
+                                ".qa-mobile-menu-toggle"
+                            );
 
 
-            var outlinePanel =
-              document.querySelector(
-                ".qa-page-outline"
-              );
+                        if (!menuButton) {
+
+                            menuButton =
+                                document.createElement("button");
+
+                            menuButton.className =
+                                "qa-mobile-menu-toggle";
+
+                            menuButton.type = "button";
+
+                            menuButton.setAttribute(
+                                "aria-label",
+                                "Open documentation navigation"
+                            );
+
+                            menuButton.textContent = "≡";
+
+                            document
+                                .querySelector(".content")
+                                .appendChild(menuButton);
+
+                        }
+
+                    }, 0);
 
 
-            if (!outlinePanel) {
+                    var outlinePanel =
+                        document.querySelector(
+                            ".qa-page-outline"
+                        );
 
-              outlinePanel =
-                document.createElement("aside");
 
-              outlinePanel.className =
-                "qa-page-outline";
+                    if (!outlinePanel) {
 
-              outlinePanel.setAttribute(
-                "aria-label",
-                "On this page"
-              );
+                        outlinePanel =
+                            document.createElement("aside");
 
-              document
-                .querySelector(".content")
-                .appendChild(outlinePanel);
+                        outlinePanel.className =
+                            "qa-page-outline";
+
+                        outlinePanel.setAttribute(
+                            "aria-label",
+                            "On this page"
+                        );
+
+                        document
+                            .querySelector(".content")
+                            .appendChild(outlinePanel);
+
+                    }
+
+
+                    outlinePanel.replaceChildren();
+
+
+                    var label =
+                        document.createElement("strong");
+
+                    label.textContent =
+                        "On this page";
+
+                    outlinePanel.appendChild(label);
+
+
+                    document
+                        .querySelectorAll(
+                            ".markdown-section h2, .markdown-section h3"
+                        )
+                        .forEach(function (heading) {
+
+                            if (!heading.id) return;
+
+                            var link =
+                                document.createElement("a");
+
+                            link.href =
+                                "#" +
+                                vm.route.path +
+                                "?id=" +
+                                heading.id;
+
+                            link.textContent =
+                                heading.textContent;
+
+                            link.className =
+                                "level-" +
+                                heading.tagName.slice(1);
+
+                            outlinePanel.appendChild(link);
+
+                        });
+
+                });
 
             }
+        ];
 
 
-            outlinePanel.replaceChildren();
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                var mobileMenuButton =
+                    event.target.closest(
+                        ".qa-mobile-menu-toggle"
+                    );
+
+                if (mobileMenuButton) {
+
+                    document.body.classList.toggle(
+                        "qa-mobile-menu-open"
+                    );
+
+                    return;
+
+                }
 
 
-            var label =
-              document.createElement("strong");
+                if (
+                    event.target.closest(
+                        ".qa-mobile-menu a"
+                    )
+                ) {
 
-            label.textContent =
-              "On this page";
+                    document.body.classList.remove(
+                        "qa-mobile-menu-open"
+                    );
 
-            outlinePanel.appendChild(label);
-
-
-            document
-              .querySelectorAll(
-                ".markdown-section h2, .markdown-section h3"
-              )
-              .forEach(function (heading) {
-
-                if (!heading.id) return;
-
-                var link =
-                  document.createElement("a");
-
-                link.href =
-                  "#" +
-                  vm.route.path +
-                  "?id=" +
-                  heading.id;
-
-                link.textContent =
-                  heading.textContent;
-
-                link.className =
-                  "level-" +
-                  heading.tagName.slice(1);
-
-                outlinePanel.appendChild(link);
-
-              });
-
-          });
-
-        }
-      ];
+                }
 
 
-      document.addEventListener(
-        "click",
-        function (event) {
-
-          var mobileMenuButton =
-            event.target.closest(
-              ".qa-mobile-menu-toggle"
-            );
-
-          if (mobileMenuButton) {
-
-            document.body.classList.toggle(
-              "qa-mobile-menu-open"
-            );
-
-            return;
-
-          }
+                var navbarLink =
+                    event.target.closest(
+                        ".app-nav a"
+                    );
 
 
-          if (
-            event.target.closest(
-              ".qa-mobile-menu a"
-            )
-          ) {
+                if (navbarLink) {
 
-            document.body.classList.remove(
-              "qa-mobile-menu-open"
-            );
+                    event.preventDefault();
 
-          }
+                    window.location.assign(
+                        navbarLink.href
+                    );
 
+                    return;
 
-          var navbarLink =
-            event.target.closest(
-              ".app-nav a"
-            );
+                }
 
 
-          if (navbarLink) {
-
-            event.preventDefault();
-
-            window.location.assign(
-              navbarLink.href
-            );
-
-            return;
-
-          }
+                var heading =
+                    event.target.closest(
+                        ".sidebar-nav > ul > li > p"
+                    );
 
 
-          var heading =
-            event.target.closest(
-              ".sidebar-nav > ul > li > p"
-            );
+                if (!heading) return;
 
 
-          if (!heading) return;
+                heading.parentElement.classList.toggle(
+                    "is-open"
+                );
 
-
-          heading.parentElement.classList.toggle(
-            "is-open"
-          );
-
-        },
-        true
-      );
+            },
+            true
+        );
     </script>
 
 
@@ -840,71 +876,72 @@
 
 
     <script>
-      (function () {
+        (function () {
 
-        var overrides =
-          document.createElement("style");
+            var overrides =
+                document.createElement("style");
 
-        overrides.textContent =
-          "body .app-nav {" +
-          "position: fixed !important;" +
-          "top: 0 !important;" +
-          "right: 0 !important;" +
-          "left: 320px !important;" +
-          "z-index: 20 !important;" +
-          "}" +
+            overrides.textContent =
+                "body .app-nav {" +
+                "position: fixed !important;" +
+                "top: 0 !important;" +
+                "right: 0 !important;" +
+                "left: 320px !important;" +
+                "z-index: 20 !important;" +
+                "}" +
 
-          "@media (max-width: 768px) {" +
-          "body .app-nav {" +
-          "left: 0 !important;" +
-          "}" +
-          "}";
+                "@media (max-width: 768px) {" +
+                "body .app-nav {" +
+                "left: 0 !important;" +
+                "}" +
+                "}";
 
-        document.head.appendChild(overrides);
+            document.head.appendChild(overrides);
 
 
-        function pinNavbar() {
+            function pinNavbar() {
 
-          var navbar =
-            document.querySelector(
-              ".app-nav"
+                var navbar =
+                    document.querySelector(
+                        ".app-nav"
+                    );
+
+                if (!navbar) return;
+
+
+                navbar
+                    .querySelectorAll("a")
+                    .forEach(function (link) {
+
+                        link.target = "_self";
+
+                    });
+
+            }
+
+
+            new MutationObserver(pinNavbar)
+                .observe(
+                    document.body,
+                    {
+                        childList: true,
+                        subtree: true
+                    }
+                );
+
+
+            addEventListener(
+                "resize",
+                pinNavbar
             );
 
-          if (!navbar) return;
 
+            pinNavbar();
 
-          navbar
-            .querySelectorAll("a")
-            .forEach(function (link) {
-
-              link.target = "_self";
-
-            });
-
-        }
-
-
-        new MutationObserver(pinNavbar)
-          .observe(
-            document.body,
-            {
-              childList: true,
-              subtree: true
-            }
-          );
-
-
-        addEventListener(
-          "resize",
-          pinNavbar
-        );
-
-
-        pinNavbar();
-
-      }());
+        }());
 
     </script>
 
-  </body>
+</body>
+
 </html>
