@@ -31,6 +31,9 @@ API automation and service-level validation covering:
 - CI/CD integration
 
 ### Mobile Engineering
+
+Modern mobile automation engineering practices covering:
+
 - Mobile-Test-Architecture
 - Android-Automation
 - iOS-Automation
