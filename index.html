@@ -276,6 +276,11 @@
       }
 
       @media (max-width: 768px) {
+        html,
+        body {
+          overflow-x: hidden;
+        }
+
         html body.ready nav.app-nav {
           position: fixed !important;
           top: 0 !important;
@@ -287,18 +292,27 @@
         }
 
         .app-nav p {
+          display: flex;
           gap: 0;
           justify-content: space-between;
+          width: 100%;
         }
 
         .app-nav a {
+          min-width: 0;
           padding: 5px 2px;
           font-size: .64rem;
+          white-space: nowrap;
         }
 
-        body > .sidebar,
+        .sidebar,
         .sidebar-toggle {
           display: none !important;
+        }
+
+        .content {
+          left: 0 !important;
+          margin-left: 0 !important;
         }
 
         .qa-mobile-menu-toggle {
