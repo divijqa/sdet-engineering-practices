@@ -104,3 +104,7 @@ SDET Engineering Practices
     ├── Quality Gates
     └── Pipeline Orchestration
 ```
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
